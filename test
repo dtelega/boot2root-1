@@ -3,3 +3,13 @@ VBoxManage guestproperty enumerate {`VBoxManage list runningvms | awk -F"{" '{pr
 
 ipadresse: 192.168.1.33
 
+
+sudo nmap -sS 192.168.1.33
+
+dig -t mx 192.168.1.33 | grep "MX"
+
+telnet 192.168.1.33 143
+
+openssl s_client -connect 192.168.1.33:993
+
+email: root@mail.borntosec.net
