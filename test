@@ -13,3 +13,21 @@ telnet 192.168.1.33 143
 openssl s_client -connect 192.168.1.33:993
 
 email: root@mail.borntosec.net
+
+seveur: Apache 2.2.22
+
+PORT    STATE SERVICE
+21/tcp  open  ftp
+22/tcp  open  ssh
+80/tcp  open  http
+143/tcp open  imap
+443/tcp open  https
+993/tcp open  imaps
+
+les failles a chercher:
+
+1) tls self signed certificate.
+2) FTP : https://thehackernews.com/2013/12/security-risks-of-ftp-and-benefits-of.html
+3) SSH : https://www.cyberark.com/blog/four-ssh-vulnerabilities-you-should-not-ignore/
+4) IMAP/IMPAS: https://www.owasp.org/index.php/Testing_for_IMAP/SMTP_Injection_(OTG-INPVAL-011)
+5) HTTP/HTTPS: http://www.zdnet.com/article/severe-vulnerabilities-discovered-in-http2-protocol/
