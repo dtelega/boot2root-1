@@ -31,3 +31,5 @@ les failles a chercher:
 3) SSH : https://www.cyberark.com/blog/four-ssh-vulnerabilities-you-should-not-ignore/
 4) IMAP/IMPAS: https://www.owasp.org/index.php/Testing_for_IMAP/SMTP_Injection_(OTG-INPVAL-011)
 5) HTTP/HTTPS: http://www.zdnet.com/article/severe-vulnerabilities-discovered-in-http2-protocol/
+
+https://10.11.200.48/webmail/src/login.php
