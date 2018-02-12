@@ -33,3 +33,4 @@ les failles a chercher:
 5) HTTP/HTTPS: http://www.zdnet.com/article/severe-vulnerabilities-discovered-in-http2-protocol/
 
 https://10.11.200.48/webmail/src/login.php
+Test de Local File Inclusion ne donne rien pour le moment.
