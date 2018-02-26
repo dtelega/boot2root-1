@@ -45,7 +45,7 @@ go to => https://10.11.200.29/phpmyadmin/
 go to user_data change user type => 2 (2 is admin)
 
 Injection sql sur phpMyAdmin:
-
+ressource: http://www.informit.com/articles/article.aspx?p=1407358&seqNum=2
 donc on vas sur l'ognglet 
 sql est apres plusieur test on trouve que on peut ecrire et lire un fichier.php dans
 forum/templates_c
