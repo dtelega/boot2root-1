@@ -31,17 +31,18 @@ git clone https://github.com/v0re/dirb.git
 
 ![alt text](https://github.com/fhenri42/boot2root/blob/master/Ressources/Screen%20Shot%202018-03-05%20at%2010.05.14%20AM.png)
 
-* The post was made by lmezard (Laurie Mezard)
+* We can see couple second after this attempt, lmezard successful login, so we can conclude the login is lmezard (Laurie Mezard)
 
-* Conclution we have one of the password of lmezard.
+* Use this credential to login the forum.
+
+* Conclution we have one of the password and the email of lmezard.
 
 ### Webmail
 
-* On the webmail we have a login form, and we just find a password in the forum section so we decided to give it a try.
+* On the webmail we have a login form, and we just find a password and a email in the forum section so we decided to give it a try.
 
 ![alt text](https://github.com/fhenri42/boot2root/blob/master/Ressources/Screen%20Shot%202018-03-05%20at%2010.04.21%20AM.png)
 
-* After several attempts the combination was
 * Login: ```laurie@borntosec.net```
 * Password: ```!q\]Ej?*5K5cy*AJ```
 
