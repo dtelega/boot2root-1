@@ -116,4 +116,4 @@ ftp>
 * add a password, example: 12345
 * ```su firefart``` use your password
 
-#GG Your root !
+# GG Your root !
