@@ -4,7 +4,7 @@ The following method describes a user/privilege escalation.
 
 -------------------------------------------------------------------------------
 
-##First we need to find the IP address of our VM
+## First we need to find the IP address of our VM
 
 ```ifconfig```
 
