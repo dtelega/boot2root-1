@@ -73,7 +73,8 @@ git clone https://github.com/v0re/dirb.git
 * login with  ```lmezard``` ```G!@M6f4Eatau{sF"```
 * get the fun file, see example bellow:
 
-```ftp> ls
+```bash
+ftp> ls
 229 Entering Extended Passive Mode (|||25027|).
 150 Here comes the directory listing.
 -rwxr-x---    1 1001     1001           96 Oct 15  2015 README
@@ -92,7 +93,8 @@ ftp> ls
 -rwxr-x---    1 1001     1001           96 Oct 15  2015 README
 -rwxr-x---    1 1001     1001       808960 Oct 08  2015 fun
 226 Directory send OK.
-ftp>```
+ftp>
+```
 
 ## Using the fun file
 
