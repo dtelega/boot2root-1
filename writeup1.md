@@ -14,7 +14,10 @@ The following method describes a user/privilege escalation.
 ```
 * Now we scan this IP with nmap
 
-```nmap 192.168.80.1-255```
+```
+nmap 192.168.80.1-255
+```
+
 ```
 Starting Nmap 7.60 ( https://nmap.org ) at 2018-02-22 14:14 CET
 Nmap scan report for 192.168.80.1
@@ -49,18 +52,23 @@ PORT    STATE SERVICE
 
 * In /home/lmezard/ we find 2 files.
 
-```cd /home/lmezard/ ; ls
+```
+cd /home/lmezard/ ; ls
 fun  README
 ```
 * The fun file is actually an archive...
 
-`` file fun
-fun: POSIX tar archive (GNU)```
+```
+file fun
+fun: POSIX tar archive (GNU)
+```
 
 * Decompressing it produces a new directory called "ft_fun".
 
-```tar xvf fun ; ls
-ft_fun  fun  README ```
+```
+tar xvf fun ; ls
+ft_fun  fun  README
+```
 
 * "ft_fun" directory contains a fuck tone of files...
 * We notice that each one of them is written in C language and its last line is tagged with a comment like so
@@ -70,9 +78,11 @@ ft_fun  fun  README ```
 
 * We can then make a little PHP script to read them and recompose the original C file, compile the file and execute it.
 
-``` $ php pack.php && gcc main.c && ./a.out
+```
+php pack.php && gcc main.c && ./a.out
 MY PASSWORD IS: Iheartpwnage
-Now SHA-256 it and submit ```
+Now SHA-256 it and submit
+```
 
 * If we sha256 this password we obtain :
 
@@ -160,7 +170,8 @@ In this directory we find two files
 
 ```
 ls
-README  turtule```
+README  turtule
+```
 
 * The file turtule is actually a draw map for letters that gives us : SLASH
 * It is said in the README to be used with 'zaz' user.
