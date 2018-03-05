@@ -29,7 +29,7 @@ git clone https://github.com/v0re/dirb.git
 
 * If your look for ```Failed password``` your will find one where the user is ``` !q\]Ej?*5K5cy*AJ``` and we think that the user who tried to login make a mistake between are password and login
 
-URL
+![alt text](https://github.com/fhenri42/boot2root/blob/master/Ressources/Screen%20Shot%202018-03-05%20at%2010.05.14%20AM.png)
 
 * The post was made by lmezard (Laurie Mezard)
 
@@ -39,7 +39,7 @@ URL
 
 * On the webmail we have a login form, and we just find a password in the forum section so we decided to give it a try.
 
-URL
+![alt text](https://github.com/fhenri42/boot2root/blob/master/Ressources/Screen%20Shot%202018-03-05%20at%2010.04.21%20AM.png)
 
 * After several attempts the combination was
 * Login: ```laurie@borntosec.net```
@@ -47,7 +47,8 @@ URL
 
 * When we logged in , we find a email with the subject ```DB Access```
 
-URL
+
+![alt text](https://github.com/fhenri42/boot2root/blob/master/Ressources/Screen%20Shot%202018-03-05%20at%2010.06.32%20AM.png)
 
 * Login: ```root```
 * Password: ```Fg-'kKXBj87E:aJ$```
